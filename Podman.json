@@ -1,0 +1,47 @@
+{
+    "Description": "A structed file to store which functions try to change namespace",
+    "Datas": [
+        {
+            "Name": "joinMountAndExec",
+            "Path": "libpod/container_copy_linux.go",
+            "Comments": "joinMountAndExec executes the specified function `f` inside the container's mount and PID namespace.That allows for having the exact view on the container's file system.",
+            "Note":"在MNT namespace中执行指定函数",
+            "Namespaces": [
+                "PID",
+                "MNT"
+            ]
+        },
+        {
+            "Name":"createRootlessContainer",
+            "Path":"libpod/oci_conmon_linux.go",
+            "Paramas":["/proc/PID/task/TID/ns/mnt","unix.CLONE_NEWNS"],
+            "Note":"在unshare执行出现错误时切回原来的namespace. 当进程创建新的命名空间时，它会失去对原有命名空间的控制权，只有在新的命名空间中运行的进程才能对该命名空间进行操作。为了能够稳定地切换回原有命名空间，需要在新的命名空间中创建一个子进程，并且在该子进程中执行切换操作。",
+            "Namespaces":["MNT"]
+        },
+        {
+            "Name":"Set",
+            "Path":"vendor/github.com/containernetworking/plugins/pkg/ns/ns_linux.go",
+            "Namespaces":["NET"],
+            "Note":"这是vendor里的。真的用的上吗"
+        },
+        {
+            "Name":"JoinNamespaceAndProcessInfoWithOptions",
+            "Path":"vendor/github.com/containers/psgo/psgo.go",
+            "Namespaces":["MNT"],
+            "Note":"这里是podman top的调用路径,在此之后提取pid"
+        },
+        {
+            "Name":"Set",
+            "Path":"vendor/github.com/vishvananda/netns/netns_linux.go",
+            "Namespaces":["NET"],
+            "Note":"这里是一个事务函数，应该会有很多函数调用。重点检查一下哪些函数调用了这个，调用的函数也有切换network的行为",
+            "CheckCalls":true
+        },
+        {
+            "Name":"Setns",
+            "Path":"vendor/github.com/vishvananda/netns/netns_linux.go",
+            "Namespaces":["Not Specified"],
+            "CheckCalls":true
+        }
+    ]
+}

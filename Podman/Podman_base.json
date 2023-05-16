@@ -1,5 +1,6 @@
 {
-    "Name": "Podman",
+    "Name": "Podman_base",
+    "Product name":"Podman",
     "Version": "v4.4.0",
     "Description": "A structed file to store which functions try to change namespace",
     "Search by Setns": [

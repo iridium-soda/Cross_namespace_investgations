@@ -1,0 +1,192 @@
+{
+    "Name": "Podman_call",
+    "Product Name": "Podman",
+    "Version": "v4.4.0",
+    "Description": "Trace functions have the capability to alter namespaces independently, and thereby determine the functions that utilize them.",
+    "Data": [
+        {
+            "Name": "joinMountAndExec",
+            "Path": "libpod/container_copy_linux.go",
+            "Called by": [
+                {
+                    "Name": "copyToArchive",
+                    "class": "Container",
+                    "Path": "libpod/container_copy_common.go",
+                    "Called by": [
+                        {
+                            "Name": "CopyToArchive",
+                            "Class": "Container",
+                            "Path": "libpod/container_api.go",
+                            "Called by": [
+                                {
+                                    "Name": "ContainerCopyToArchive",
+                                    "Path": "pkg/domain/infra/abi/archive.go",
+                                    "Class": "ContainerEngine",
+                                    "Called by": [
+                                        {
+                                            "Name": "copyFromContainer",
+                                            "Path": "cmd/podman/containers/cp.go",
+                                            "Comments": "copyFromContainer copies from the containerPath on the container to hostPath.",
+                                            "Functions": "podman cp",
+                                            "Finished": true
+                                        },
+                                        {
+                                            "Name": "copyContainerToContainer",
+                                            "Path": "cmd/podman/containers/cp.go",
+                                            "Functions": "podman cp",
+                                            "Finished": true
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "handleHeadAndGet",
+                                    "Path": "pkg/api/handlers/compat/containers_archive.go",
+                                    "Called by": [
+                                        {
+                                            "Name": "Archive",
+                                            "Path": "pkg/api/handlers/compat/containers_archive.go",
+                                            "Note": "To receive and handle request /containers/{name}/archive",
+                                            "Type": [
+                                                "HEAD",
+                                                "GET"
+                                            ],
+                                            "Called by": [
+                                                {
+                                                    "Name": "registerArchiveHandlers",
+                                                    "Path": "pkg/api/server/register_archive.go",
+                                                    "Comments": "Put a tar archive of files into a container",
+                                                    "Type": [
+                                                        "HEAD",
+                                                        "GET"
+                                                    ],
+                                                    "String": "/containers/{name}/archive",
+                                                    "Note": "GET:Get a tar archive of files from a container",
+                                                    "Called by": [
+                                                        {
+                                                            "Name": "Stat",
+                                                            "Path": "pkg/bindings/containers/archive.go",
+                                                            "Type": [
+                                                                "HEAD"
+                                                            ],
+                                                            "Comments": "Stat checks if the specified path is on the container.  Note that the stat report may be set even in case of an error.  This happens when the path resolves to symlink pointing to a non-existent path.",
+                                                            "Called by": [
+                                                                {
+                                                                    "Name": "ContainerStat",
+                                                                    "Path": "pkg/domain/infra/tunnel/containers.go",
+                                                                    "Class": "ContainerEngine",
+                                                                    "Called by": [
+                                                                        {
+                                                                            "Name": "copyContainerToContainer",
+                                                                            "Path": "cmd/podman/containers/cp.go",
+                                                                            "Functions": "podman cp",
+                                                                            "Finished": true
+                                                                        },
+                                                                        {
+                                                                            "Name": "copyContainerFromContainer",
+                                                                            "Path": "cmd/podman/containers/cp.go",
+                                                                            "Functions": "podman cp",
+                                                                            "Finished": true
+                                                                        },
+                                                                        {
+                                                                            "Name": "resolvePathOnDestinationContainer",
+                                                                            "Path": "cmd/podman/containers/cp.go",
+                                                                            "Functions": "podman cp",
+                                                                            "Finished": true
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "Name": "ContainerStatPath",
+                                                            "Path": "vendor/github.com/docker/docker/client/container_copy.go",
+                                                            "Comments": "ContainerStatPath returns Stat information about a path inside the container filesystem.",
+                                                            "Note": "Vendor functions. Terminated."
+                                                        },
+                                                        {
+                                                            "Name": "CopyToContainer",
+                                                            "Path": "vendor/github.com/docker/docker/client/container_copy.go",
+                                                            "Comments": "CopyToContainer copies content into the container filesystem.",
+                                                            "Note": "Vendor functions. Terminated."
+                                                        },
+                                                        {
+                                                            "Name": "CopyFromContainer",
+                                                            "Path": "vendor/github.com/docker/docker/client/container_copy.go",
+                                                            "Comments": "CopyFromContainer gets the content from the container and returns it as a Reader",
+                                                            "Note": "Vendor functions. Terminated."
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "Name": "statInsideMount",
+                    "Path": "libpod/container_stat_linux.go",
+                    "Comments": "statInsideMount stats the specified path *inside* the container's mount and PID namespace.  It returns the file info along with the resolved root (\"/\") and the resolved path (relative to the root).",
+                    "Called by": [
+                        {
+                            "Name": "statInContainer",
+                            "Path": "libpod/container_stat_linux.go",
+                            "Class": "Container",
+                            "Called by": [
+                                {
+                                    "Name": "stat",
+                                    "Path": "libpod/container_stat_common.go",
+                                    "Called by": [
+                                        {
+                                            "Name": "Stat",
+                                            "Path": "libpod/container_api.go",
+                                            "Class": "Container",
+                                            "Called by": [
+                                                {
+                                                    "Name": "ContainerStat",
+                                                    "Class": "ContainerEngine",
+                                                    "Path": "pkg/domain/infra/abi/containers_stat.go",
+                                                    "Note": "这个infra下面有两个一样的ContainerStat实现，引用也是一样的。初步判断一样",
+                                                    "Finished": true
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "Name": "createRootlessContainer",
+            "Path": "libpod/oci_conmon_linux.go",
+            "Class": "ConmonOCIRuntime",
+            "Called by": [
+                {
+                    "Name": "CreateContainer",
+                    "Path": "libpod/oci_conmon_common.go",
+                    "Comments": "CreateContainer creates a container.",
+                    "Conditions": "!ctr.config.Privileged && !rootless.IsRootless()",
+                    "Called by": [
+                        {
+                            "Name": "init",
+                            "Path": "libpod/container_internal.go",
+                            "Class": "Container",
+                            "Functions": "Create a libpod",
+                            "Called by": [
+                                {
+                                    "Name": "Init",
+                                    "Path": "libpod/container_api.go"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

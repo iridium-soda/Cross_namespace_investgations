@@ -180,7 +180,7 @@
                                 {
                                     "Name": "Init",
                                     "Path": "libpod/container_api.go",
-                                    "Class":"Container",
+                                    "Class": "Container",
                                     "Comments": "Init creates a container in the OCI runtime, moving a container from ContainerStateConfigured, ContainerStateStopped, or ContainerStateExited to ContainerStateCreated.",
                                     "Note": "这里创建一个libpod",
                                     "Called by": [
@@ -222,6 +222,17 @@
                     ]
                 }
             ]
+        },
+        {
+            "Name": "JoinNamespaceAndProcessInfoWithOptions",
+            "Path": "/Users/iridium/Documents/Research/podman/vendor/github.com/containers/psgo/psgo.go",
+            "Note": "直接到top.",
+            "Functions": "top",
+            "Finished": true
+        },{
+            "Name":"Set",
+            "Path":"vendor/github.com/containernetworking/plugins/pkg/ns/ns_linux.go",
+            "Note":"这里开始手动分析"
         }
     ]
 }

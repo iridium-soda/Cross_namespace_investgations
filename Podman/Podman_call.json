@@ -176,11 +176,46 @@
                             "Name": "init",
                             "Path": "libpod/container_internal.go",
                             "Class": "Container",
-                            "Functions": "Create a libpod",
                             "Called by": [
                                 {
                                     "Name": "Init",
-                                    "Path": "libpod/container_api.go"
+                                    "Path": "libpod/container_api.go",
+                                    "Class":"Container",
+                                    "Comments": "Init creates a container in the OCI runtime, moving a container from ContainerStateConfigured, ContainerStateStopped, or ContainerStateExited to ContainerStateCreated.",
+                                    "Note": "这里创建一个libpod",
+                                    "Called by": [
+                                        {
+                                            "Name": "AttachContainer",
+                                            "Path": "pkg/api/handlers/compat/containers_attach.go",
+                                            "Comments": "For Docker compatibility, we need to re-initialize containers in these states.",
+                                            "Functions": "Attach a container",
+                                            "Description": "Hijacks the connection to forward the container's standard streams to the client.",
+                                            "Request string": "/containers/{name}/attach",
+                                            "Finished": true
+                                        },
+                                        {
+                                            "Name": "InitContainer",
+                                            "Path": "pkg/api/handlers/libpod/containers.go",
+                                            "Functions": "Initialize a container",
+                                            "Description": "Performs all tasks necessary for initializing the container but does not start the container.",
+                                            "Request string": "/libpod/containers/{name}/init",
+                                            "Finished": true
+                                        },
+                                        {
+                                            "Name": "ContainerInit",
+                                            "Path": "pkg/domain/infra/abi/containers.go",
+                                            "Class": "ContainerEngine",
+                                            "Called by": [
+                                                {
+                                                    "Name": "initContainer",
+                                                    "Path": "cmd/podman/containers/init.go",
+                                                    "Functions": "Initialize one or more containers",
+                                                    "Description": "Initialize one or more containers, creating the OCI spec and mounts for inspection. Container names or IDs can be used.",
+                                                    "Finished": true
+                                                }
+                                            ]
+                                        }
+                                    ]
                                 }
                             ]
                         }

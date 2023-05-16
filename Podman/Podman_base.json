@@ -1,6 +1,6 @@
 {
     "Name": "Podman_base",
-    "Product name":"Podman",
+    "Product name": "Podman",
     "Version": "v4.4.0",
     "Description": "A structed file to store which functions try to change namespace",
     "Search by Setns": [
@@ -113,33 +113,79 @@
             "String": "/proc/%d/ns/user"
         },
         {
-          "Name":"IsNamespaceSupported",
-          "Path":"vendor/github.com/opencontainers/runc/libcontainer/configs/namespaces_linux.go",
-          "Comments":"IsNamespaceSupported returns whether a namespace is available or not",
-          "String":"/proc/self/ns/<nsFile>"
+            "Name": "IsNamespaceSupported",
+            "Path": "vendor/github.com/opencontainers/runc/libcontainer/configs/namespaces_linux.go",
+            "Comments": "IsNamespaceSupported returns whether a namespace is available or not",
+            "String": "/proc/self/ns/<nsFile>"
         },
         {
-            "Name":"GetPath",
-            "Path":"vendor/github.com/opencontainers/runc/libcontainer/configs/namespaces_linux.go",
-            "String":"/proc/%d/ns/<nsName>",
-            "Note":"这是Namespace类型下的一个方法"
+            "Name": "GetPath",
+            "Path": "vendor/github.com/opencontainers/runc/libcontainer/configs/namespaces_linux.go",
+            "String": "/proc/%d/ns/<nsName>",
+            "Note": "这是Namespace类型下的一个方法"
         },
         {
-            "Name":"GetFromPid",
-            "Path":"vendor/github.com/vishvananda/netns/netns_linux.go",
-            "String":"/proc/%d/ns/net"
+            "Name": "GetFromPid",
+            "Path": "vendor/github.com/vishvananda/netns/netns_linux.go",
+            "String": "/proc/%d/ns/net"
         },
         {
-            "Name":"GetFromThread",
-            "Path":"vendor/github.com/vishvananda/netns/netns_linux.go",
-            "String":"/proc/%d/task/%d/ns/net"
+            "Name": "GetFromThread",
+            "Path": "vendor/github.com/vishvananda/netns/netns_linux.go",
+            "String": "/proc/%d/task/%d/ns/net"
         },
         {
-            "Name":"NewNamed",
-            "Path":"vendor/github.com/vishvananda/netns/netns_linux.go",
-            "Comments":"NewNamed creates a new named network namespace and returns a handle to it",
-            "String":"/proc/%d/task/%d/ns/net",
-            "Note":"后续调用了syscall.Mount"
+            "Name": "NewNamed",
+            "Path": "vendor/github.com/vishvananda/netns/netns_linux.go",
+            "Comments": "NewNamed creates a new named network namespace and returns a handle to it",
+            "String": "/proc/%d/task/%d/ns/net",
+            "Note": "后续调用了syscall.Mount"
+        }
+    ],
+    "Search by unshare": [
+        {
+            "Name": "joinMountAndExec",
+            "Path": "libpod/container_copy_linux.go",
+        },
+        {
+            "Name": "Do",
+            "Path": "libpod/networking_linux.go"
+        },
+        {
+            "Name": "createRootlessContainer",
+            "Path": "libpod/oci_conmon_linux.go"
+        },
+        {
+            "Name": "SetupIntermediateMountNamespace",
+            "Path": "vendor/github.com/containers/buildah/bind/mount.go",
+            "Namespaces": [
+                "MNT"
+            ]
+        },
+        {
+            "Name": "NewNSWithName",
+            "Path": "vendor/github.com/containers/common/pkg/netns/netns_linux.go",
+            "Namespaces": [
+                "NET"
+            ]
+        },
+        {
+            "Name": "JoinNamespaceAndProcessInfoWithOptions",
+            "Path": "vendor/github.com/containers/psgo/psgo.go"
+        },
+        {
+            "Name": "chroot",
+            "Path": "vendor/github.com/containers/storage/pkg/chrootarchive/chroot_linux.go",
+            "Namespaces": [
+                "MNT"
+            ]
+        },
+        {
+            "Name": "New",
+            "Path": "vendor/github.com/vishvananda/netns/netns_linux.go",
+            "Namespaces": [
+                "NET"
+            ]
         }
     ]
 }

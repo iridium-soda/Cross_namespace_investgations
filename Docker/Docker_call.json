@@ -1,0 +1,51 @@
+{
+    "Name": "Docker Moby",
+    "Commit": "1371aee3",
+    "Check by setns": [
+        {
+            "Name": "Go",
+            "Path": "internal/unshare/unshare_linux.go",
+            "Comment": "Go calls the given functions in a new goroutine, locked to an OS thread, which has had the parts of its execution state disassociated from the rest of the current process using [unshare(2)]",
+            "Namespace": [
+                "NA"
+            ]
+        },
+        {
+            "Name": "Set",
+            "Path": "vendor/github.com/vishvananda/netns/netns_linux.go",
+            "Namespace": [
+                "NET"
+            ]
+        }
+    ],
+    "Check by unshare": [
+        {
+            "Name": "mountFrom",
+            "Path": "daemon/graphdriver/overlay2/mount.go",
+            "Namespace": [
+                "MNT"
+            ]
+        },
+        {
+            "Name": "Go",
+            "Path": "internal/unshare/unshare_linux.go",
+            "Namespace": [
+                "NA"
+            ]
+        },
+        {
+            "Name": "setDefaultVLAN",
+            "Path": "libnetwork/drivers/overlay/ov_network.go",
+            "Namespace": [
+                "MNT"
+            ]
+        },
+        {
+            "Name": "New",
+            "Path": "vendor/github.com/vishvananda/netns/netns_linux.go",
+            "Namespace": [
+                "NET"
+            ]
+        }
+    ]
+}

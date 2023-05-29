@@ -145,7 +145,7 @@
     "Search by unshare": [
         {
             "Name": "joinMountAndExec",
-            "Path": "libpod/container_copy_linux.go",
+            "Path": "libpod/container_copy_linux.go"
         },
         {
             "Name": "Do",

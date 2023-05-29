@@ -22,6 +22,7 @@
                                     "Name": "ContainerCopyToArchive",
                                     "Path": "pkg/domain/infra/abi/archive.go",
                                     "Class": "ContainerEngine",
+                                    "Note":"这两个函数弄混了。cp应该是另一个stat。但为什么也能达到目标函数？",
                                     "Called by": [
                                         {
                                             "Name": "copyFromContainer",
@@ -82,7 +83,7 @@
                                                                             "Finished": true
                                                                         },
                                                                         {
-                                                                            "Name": "copyContainerFromContainer",
+                                                                            "Name": "copyFromContainer",
                                                                             "Path": "cmd/podman/containers/cp.go",
                                                                             "Functions": "podman cp",
                                                                             "Finished": true
@@ -148,7 +149,7 @@
                                                     "Name": "ContainerStat",
                                                     "Class": "ContainerEngine",
                                                     "Path": "pkg/domain/infra/abi/containers_stat.go",
-                                                    "Note": "这个infra下面有两个一样的ContainerStat实现，引用也是一样的。初步判断一样",
+                                                    "Note": "这个infra下面有两个一样的ContainerStat实现,应该是根据用途划分。pkg/domain/infra/abi/containers_stat.go里的是用于libpod，在之前检查libpod，而另一个pkg/domain/infra/tunnel/containers.go会直接返回c.stat，应该用于一般容器。container cp应该就是这个。",
                                                     "Finished": true
                                                 }
                                             ]

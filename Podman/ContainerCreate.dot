@@ -1,0 +1,10 @@
+/*This file is to describe how a podman container is created and which namespace involved.*/
+digraph {
+    a -> b;
+    a -> c;
+    a->{d,e};
+    subgraph cluster_bc{
+        label="asd";
+        d -> e;
+    }
+}
